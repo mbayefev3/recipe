@@ -25,14 +25,22 @@ function RecipeCreate({addRecipeData}) {
 
      const handleSubmitForm =(e) => {
       e.preventDefault()
-      addRecipeData({name,cuisine, photo,ingredients,preparation})
-      setFormData({
-        name:'',
-        cuisine:'',
-        photo:'',
-        ingredients:'',
-        preparation:''
-      })
+      if(name && cuisine && photo && ingredients && preparation){
+        addRecipeData({name,cuisine, photo,ingredients,preparation})
+        setFormData({
+          name:'',
+          cuisine:'',
+          photo:'',
+          ingredients:'',
+          preparation:''
+        })
+      }else{
+
+        setFormData({
+          ...formData
+        })
+      }
+      
      }
 
   return (
@@ -42,7 +50,7 @@ function RecipeCreate({addRecipeData}) {
           <tr>
             <td><input name="name" value={name} onChange={handleFormData} placeholder="Name"/></td>
             <td> <input name="cuisine" value={cuisine} onChange={handleFormData} placeholder="Cuisine"/></td>
-            <td><input name="photo" value={photo} onChange={handleFormData} placeholder="URL"/></td>
+            <td><input name="photo" value={photo} onChange={handleFormData} placeholder="URL" type='url'/></td>
             <td><textarea name="ingredients" value={ingredients} onChange={handleFormData} placeholder="Ingredients"/></td>
             <td><textarea name="preparation" value={preparation} onChange={handleFormData} placeholder="Preparation"/></td>
             <td>
